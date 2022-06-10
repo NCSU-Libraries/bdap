@@ -7,7 +7,7 @@ Docker files for born digital processing
 3. Download files into that directory
 4. Open Dockerfile and add your user name and ID
 5. In terminal, cd to that directory
-6. run `docker build -t foc:bdap .`
+6. run `docker build -t focal:bdap .`
 7. Wait for image to build
 8. When ready to use, open docker-compose.yml
 9. In termninal run `id` to get your id number; update user name, ID, and paths in compose file
