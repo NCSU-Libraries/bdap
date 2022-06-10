@@ -13,13 +13,14 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get -y install build-essential curl disktype fdisk git libimage-exiftool-perl wget sudo unzip software-properties-common default-jre \
+    && apt-get -y install build-essential curl disktype fdisk git libimage-exiftool-perl wget sudo unzip software-properties-common default-jre
 #   && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 #   && chmod 0440 /etc/sudoers.d/$USERNAME
     
 # Install clamav
 
-RUN freshclam # note this step may not be necessary for building image
+RUN freshclam
+# note: freshclam may not be necessary for building image
 
 # Install bulk_extractor
 RUN mkdir /home/repos && cd /home/repos && git clone --recursive https://github.com/simsong/bulk_extractor.git && cd bulk_extractor && bash etc/CONFIGURE_UBUNTU20LTS.bash && bash bootstrap.sh && ./configure && make && make install
