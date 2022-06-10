@@ -1,7 +1,7 @@
 version : '3'
 services:
   bdap:
-    image: focal:bdap
+    image: foc:bdap
     tty: true
     stdin_open: true
     volumes:
