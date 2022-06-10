@@ -13,4 +13,4 @@ Docker files for born digital processing
 9. In termninal run `id` to get your id number; update user name, ID, and paths in compose file
 10. In terminal, in directory containing files run `docker-compose up -d`
 11. When returned to prompt, run `docker-compose exec bdap bash`
-12. When done, in same directory, run `docker-compose down`
+12. When done, in same directory, run `docker-compose stop`
