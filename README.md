@@ -9,7 +9,8 @@ Docker files for born digital processing
 5. In terminal, cd to that directory
 6. run `docker build -t foc:bdap .`
 7. Wait for image to build
-8. When ready to use, open docker-compose.yml and update user name and paths
-9. In terminal, in directory containing files run `docker-compose up -d`
-10. When returned to prompt, run `docker-compose exec bdap bash`
-11. When done, in same directory, run `docker-compose down`
+8. When ready to use, open docker-compose.yml
+9. In termninal run `id` to get your id number; update user name, ID, and paths in compose file
+10. In terminal, in directory containing files run `docker-compose up -d`
+11. When returned to prompt, run `docker-compose exec bdap bash`
+12. When done, in same directory, run `docker-compose down`
