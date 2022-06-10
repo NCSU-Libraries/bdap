@@ -7,4 +7,4 @@ services:
     volumes:
      - /Users/borndigital/born_digital/[uuid]:/Users/borndigital/born_digital/[uuid] # verify
      - /Volumes:/Volumes:ro
-    user: [username] # add user name from image file
+    user: tuffy
