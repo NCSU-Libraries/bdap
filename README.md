@@ -1,8 +1,8 @@
 # bdap
 Docker files for born digital processing
 
-## Instructions
-1. Install Docker Desktop
+## Docker instructions
+1. Make sure Docker Desktop is installed and running
 2. Make directory for files
 3. Download files into that directory
 4. Open Dockerfile and add your user name and ID
