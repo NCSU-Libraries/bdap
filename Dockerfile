@@ -13,7 +13,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get -y install build-essential clamav clamav-daemon curl disktype fdisk git libimage-exiftool-perl wget sudo unzip software-properties-common default-jre
+    && apt-get -y install build-essential clamav clamav-daemon curl disktype dvd+rw-tools fdisk git libimage-exiftool-perl mediainfo wget python3-pip sleuthkit sudo tree unzip software-properties-common default-jre
 #   && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 #   && chmod 0440 /etc/sudoers.d/$USERNAME
     
