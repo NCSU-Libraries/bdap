@@ -4,6 +4,7 @@ MAINTAINER bjdietz/syblack
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Add user and group
 ARG USERNAME=tuffy
 ARG GROUPNAME=scrc
 ARG USER_UID=1000
@@ -14,6 +15,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && apt-get -y update \
     && apt-get -y upgrade \
     && apt-get -y install build-essential clamav clamav-daemon curl disktype dvd+rw-tools fdisk git libimage-exiftool-perl mediainfo wget python3-pip sleuthkit sudo tree unzip software-properties-common default-jre
+# uncomment following to add user to sudoers; add " \" at end of previous line
 #   && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 #   && chmod 0440 /etc/sudoers.d/$USERNAME
     
