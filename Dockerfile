@@ -1,6 +1,6 @@
 FROM ubuntu:focal
 
-LABEL maintainer="bjdietz,syblack"
+LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
