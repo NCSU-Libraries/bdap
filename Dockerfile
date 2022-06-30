@@ -14,10 +14,9 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get -y install build-essential clamav clamav-daemon curl disktype dvd+rw-tools fdisk git libimage-exiftool-perl mediainfo wget python3-pip sleuthkit sudo tree unzip software-properties-common default-jre
-# uncomment following to add user to sudoers; add " \" at end of previous line
-#   && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-#   && chmod 0440 /etc/sudoers.d/$USERNAME
+    && apt-get -y install build-essential clamav clamav-daemon curl disktype dvd+rw-tools fdisk git libimage-exiftool-perl mediainfo wget python3-pip sleuthkit sudo tree unzip software-properties-common default-jre \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/apt-get -y update, /bin/apt-get -y upgrade, /bin/freshclam, /bin/pip3 > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
     
 # Install clamav
 RUN freshclam
