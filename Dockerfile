@@ -8,7 +8,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG USERNAME=tuffy
 ARG GROUPNAME=scrc
 ARG USER_UID=1000
-ARG USER_GID=1000
+ARG USER_GID=2000
 
 RUN groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
