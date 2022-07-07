@@ -5,6 +5,6 @@ services:
     tty: true
     stdin_open: true
     volumes:
-     - /Users/borndigital/born_digital/[uuid]:/Users/borndigital/born_digital/[uuid] # verify
+     - /Users/$userID/born_digital/$uuid:/Users/borndigital/born_digital/$uuid
      - /Volumes:/Volumes:ro
     user: tuffy

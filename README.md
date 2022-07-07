@@ -9,7 +9,6 @@ Docker files for born digital processing
 5. In terminal, cd to that directory
 6. run `docker build -t focal:bdap .`
 7. Wait for image to build
-8. When ready to use, open docker-compose.yml and update paths
-10. In terminal, in directory containing files run `docker-compose up -d`
-11. When returned to prompt, run `docker-compose exec bdap bash`
-12. When done, in same directory, run `docker-compose stop`
+8. In terminal, in directory containing files, run start_container.sh.
+9. When returned to prompt, run `docker-compose exec bdap bash`
+10. When done, in same directory, run `docker-compose stop`
