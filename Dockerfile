@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM docker.io/library/ubuntu:focal
 
 LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 
