@@ -25,7 +25,12 @@ The repository also includes a shell script for mounting working storage appropr
 6. run `docker build -t focal:bdap .`
 7. Wait for image to build
 
-# Starting container
+# Basic usage
+1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
+
+# Production usage
+This section assumes you have access to the SCRC's born-digital working storage.
+
 1. From same directory where Dockerfile is, in terminal, run `start_container.sh`.
 2. When returned to prompt, run `docker-compose exec bdap bash`
 3. When done, in same directory, run `docker-compose stop`
