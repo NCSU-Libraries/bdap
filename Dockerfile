@@ -48,7 +48,7 @@ RUN groupadd --gid $USER_GID $GROUPNAME \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
 
-# commenting out something we have fully discussed
+# commenting out something we have not fully discussed
 # COPY prelim_logical_reports.sh /home/scripts/prelim_logical_reports.sh
 
 # Not sure if following is necessary
