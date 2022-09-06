@@ -18,10 +18,10 @@ The repository also includes a shell script for mounting working storage appropr
 
 # Build image
 1. Make sure Docker Desktop is installed and running
-2. Make directory for files
-3. Download files into that directory
-4. Open Dockerfile and add your user name and ID
-5. In terminal, cd to that directory
+2. Make a directory for container-related files on your computer. 
+3. Download Dockerfile, docker-compose.yml, and start_container.sh into that directory
+4. Open Dockerfile replace "tuffy" in line 8 with your unityID. Save and close file. 
+5. In terminal, change to the directory containing the 3 files you downloaded.
 6. run `docker build -t focal:bdap .`
 7. Wait for image to build
 
