@@ -4,7 +4,7 @@ services:
     image: focal:bdap
     tty: true
     stdin_open: true
-    volumes:
-     - /Users/$userID/born_digital/$uuid:/Users/borndigital/born_digital/$uuid
-     - /Volumes:/Volumes:ro
-    user: tuffy
+    # volumes:
+    #  - ${BDAP_STORAGE_VOLUME_SOURCE:-/Users/$userID/born_digital/$uuid}:${BDAP_STORAGE_VOLUME_TARGET:-/Users/borndigital/born_digital/$uuid}
+    #  - /Volumes:/Volumes:ro
+    user: $userID
