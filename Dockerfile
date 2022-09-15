@@ -27,9 +27,9 @@ RUN groupadd --gid $USER_GID $GROUPNAME \
     && make \
     && make install \
 # Install siegfried
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 20F802FE798E6857 \
-    && add-apt-repository "deb https://www.itforarchivists.com/ buster main" \
-    && apt-get update \
+    && curl -sL "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x20F802FE798E6857" | gpg --dearmor | sudo tee /usr/share/keyrings/siegfried-archive-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/siegfried-archive-keyring.gpg] https://www.itforarchivists.com/ buster main" | sudo tee -a /etc/apt/sources.list.d/siegfried.list \
+    && sudo apt-get update \
     && sudo apt-get install siegfried \
 # Install hfsexplorer
     && mkdir /usr/share/hfsexplorer \
