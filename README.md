@@ -27,7 +27,8 @@ The repository also includes a shell script for mounting working storage appropr
 
 # Production usage
 
-1. Open the .env file and enter your uuid. _Note: If you're not using SCRC's born-digital working storage, you can comment out the uuid, then uncomment and use the storage variables._
+1. Run `sed -i '' '2s/^/uuid=1234\n/' .env`, replacing 1234 with your own uuid.
+If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
 2. From same directory where Dockerfile is, in terminal, run `docker-compose up -d`
 3. When returned to prompt, run `docker-compose exec bdap bash`
 4. When done, in same directory, run `docker-compose stop`
