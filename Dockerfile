@@ -67,6 +67,7 @@ RUN apt-get update \
     && cd dfxml_python \
     && pip3 install . \
     && cd /home \
+# Removing repos
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
 
