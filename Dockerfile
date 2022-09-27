@@ -10,9 +10,7 @@ ARG GROUPNAME=scrc
 ARG USER_UID=1000
 ARG USER_GID=2000
 
-RUN groupadd --gid $USER_GID $GROUPNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update \
+RUN apt-get update \
     && apt-get install -y \
     build-essential \
     clamav \
@@ -34,8 +32,11 @@ RUN groupadd --gid $USER_GID $GROUPNAME \
     tree \
     unzip \
     wget \
-    # Clean up the apt cache
+# Clean up the apt cache
     && rm -rf /var/lib/apt/lists/* \
+# Users, group, and sudo access
+    && groupadd --gid $USER_GID $GROUPNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/apt-get -y update, /bin/apt-get -y upgrade, /bin/freshclam > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
 # Install bulk_extractor
