@@ -12,9 +12,30 @@ ARG USER_GID=2000
 
 RUN groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get -y update \
-    && apt-get -y upgrade \
-    && apt-get -y install build-essential clamav clamav-daemon curl disktype dvd+rw-tools fdisk git libimage-exiftool-perl mediainfo nfs-common wget python3 python3-pip sleuthkit sudo tree unzip software-properties-common default-jre \
+    && apt-get update \
+    && apt-get install -y \
+    build-essential \
+    clamav \
+    clamav-daemon \
+    curl \
+    default-jre \
+    disktype \
+    dvd+rw-tools \
+    fdisk \
+    git \
+    libimage-exiftool-perl \
+    mediainfo \
+    nfs-common \
+    python3 \
+    python3-pip \
+    sleuthkit \
+    software-properties-common \
+    sudo \
+    tree \
+    unzip \
+    wget \
+    # Clean up the apt cache
+    && rm -rf /var/lib/apt/lists/* \
     && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/apt-get -y update, /bin/apt-get -y upgrade, /bin/freshclam > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
 # Install bulk_extractor
@@ -51,5 +72,4 @@ RUN groupadd --gid $USER_GID $GROUPNAME \
 # commenting out something we have not fully discussed
 # COPY prelim_logical_reports.sh /home/scripts/prelim_logical_reports.sh
 
-# Not sure if following is necessary
 CMD [ "/bin/bash" ]
