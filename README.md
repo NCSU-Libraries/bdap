@@ -16,7 +16,7 @@ The repository also includes a shell script for mounting working storage appropr
 - sudo for limited tasks for non-root user
 - various Linux utilties
 
-# Use on Mac
+# Using with Docker on Mac
 ## Build image
 1. Make sure Docker Desktop is installed and running.
 2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
@@ -37,8 +37,17 @@ If you're not using SCRC's born-digital working storage, you can uncomment and u
 
 If you're committing your .env changes to your own repository, open the .gitignore file and uncomment .env.
 
-# Using on RHEL
-Coming soon
+# Using with podman on RHEL8
+## Build image
+1. podman is already installed on RHEL8.
+2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
+3. Run `sudo podman build --build-arg USERNAME=$(whoami) --network host -t focal:bdap .` [verify]
 
-# Using on Windows
+## Basic usage
+1. `sudo podman run -v /home/bjdietz/born_digital:/home/born_digital --network host --rm -it localhost/ubu:bdap /bin/bash`
+
+## Production usage
+coming soon
+
+# Using with Docker on Windows
 Coming soon
