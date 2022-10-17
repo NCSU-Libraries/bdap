@@ -17,12 +17,20 @@ The repository also includes a shell script for mounting working storage appropr
 - various Linux utilties
 
 # Build image
+
+## On Mac
 1. Make sure Docker Desktop is installed and running.
 2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
 3. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
 If you're on a Mac with an M1 chip, you may also need to use the `--platform linux/x86_64` flag.
 
 4. Wait for image to build.
+
+## On RHEL
+Coming soon
+
+## On Windows
+Coming soon
 
 # Basic usage
 1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
