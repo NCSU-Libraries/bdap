@@ -16,7 +16,7 @@ The repository also includes a shell script for mounting working storage appropr
 - sudo for limited tasks for non-root user
 - various Linux utilties
 
-# Mac
+# Use on Mac
 ## Build image
 1. Make sure Docker Desktop is installed and running.
 2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
@@ -37,8 +37,8 @@ If you're not using SCRC's born-digital working storage, you can uncomment and u
 
 If you're committing your .env changes to your own repository, open the .gitignore file and uncomment .env.
 
-# On RHEL
+# Using on RHEL
 Coming soon
 
-# On Windows
+# Using on Windows
 Coming soon
