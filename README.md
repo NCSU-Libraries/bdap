@@ -60,7 +60,7 @@ coming soon
 1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
 
 ## Production usage
-1. Open the .env file and add `uuid=1234`, replacing 1234 with your UUID.
+1. Run ``"`nuuid=1234" |Add-Content -Path .env``, replacing 1234 with your UUID.
 If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
 2. From same directory where Dockerfile is, in terminal, run `docker-compose -f windows.yml up -d`
 3. When returned to prompt, run `docker-compose exec bdap bash`
