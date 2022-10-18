@@ -55,7 +55,7 @@ coming soon
 1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
 
 ## Production usage
-1. Create a volume pointing to your NFS storage: `docker volume create --driver local --opt type=nfs --opt  o=addr=lib-scrc-files.lib.ncsu.edu,nfsvers=4,rw,soft,nolock --opt device=:/archives/working/born_digital born-digital`
+1. Create a volume pointing to your NFS storage: `docker volume create --driver local --opt type=nfs --opt o=addr=lib-scrc-files.lib.ncsu.edu,nfsvers=4,rw,soft,nolock --opt device=:/archives/working/born_digital born-digital`
 2. Run ``"`nuuid=1234" |Add-Content -Path .env``, replacing 1234 with your UUID.
 If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
 3. From same directory where Dockerfile is, run `docker-compose -f windows.yml up -d`
