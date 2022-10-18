@@ -4,8 +4,6 @@ Docker files for born digital processing
 # About
 The bdap container packages and configures tools that will be useful to support born-digital archival processing. This approach will allow us to provide a consistent experience across computing platforms.
 
-The repository also includes a shell script for mounting working storage appropriately (to date works on Mac).
-
 # What's included in the container
 - tar
 - brunnhilde
@@ -22,7 +20,6 @@ The repository also includes a shell script for mounting working storage appropr
 2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
 3. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
 If you're on a Mac with an M1 chip, you may also need to use the `--platform linux/x86_64` flag.
-
 4. Wait for image to build.
 
 ## Basic usage
@@ -34,8 +31,6 @@ If you're not using SCRC's born-digital working storage, you can uncomment and u
 2. From same directory where Dockerfile is, in terminal, run `docker-compose up -d`
 3. When returned to prompt, run `docker-compose exec bdap bash`
 4. When done, in same directory, run `docker-compose stop`
-
-If you're committing your .env changes to your own repository, open the .gitignore file and uncomment .env.
 
 # Using with podman on RHEL8
 ## Build image
@@ -60,10 +55,11 @@ coming soon
 1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
 
 ## Production usage
-1. Run ``"`nuuid=1234" |Add-Content -Path .env``, replacing 1234 with your UUID.
+1. Create a volume pointing to your NFS storage: `docker volume create --driver local --opt type=nfs --opt  o=addr=lib-scrc-files.lib.ncsu.edu,nfsvers=4,rw,soft,nolock --opt device=:/archives/working/born_digital born-digital`
+2. Run ``"`nuuid=1234" |Add-Content -Path .env``, replacing 1234 with your UUID.
 If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
-2. From same directory where Dockerfile is, in terminal, run `docker-compose -f windows.yml up -d`
-3. When returned to prompt, run `docker-compose exec bdap bash`
-4. When done, in same directory, run `docker-compose stop`
+3. From same directory where Dockerfile is, run `docker-compose -f windows.yml up -d`
+4. When returned to prompt, run `docker-compose exec bdap bash`
+5. When done, in same directory, run `docker-compose stop`
 
 If you're committing your .env changes to your own repository, open the .gitignore file and uncomment .env.
