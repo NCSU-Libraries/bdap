@@ -1,0 +1,12 @@
+version : '3'
+services:
+  bdap:
+    image: focal:bdap
+    tty: true
+    stdin_open: true
+    volumes:
+     - ${BDAP_STORAGE_VOLUME_SOURCE:-born-digital}:${BDAP_STORAGE_VOLUME_TARGET:-/Users/borndigital/born_digital/}
+    user: $userID
+volumes:
+    born-digital:
+        external: true

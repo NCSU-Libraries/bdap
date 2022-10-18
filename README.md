@@ -50,4 +50,20 @@ If you're committing your .env changes to your own repository, open the .gitigno
 coming soon
 
 # Using with Docker on Windows
-Coming soon
+## Build image
+1. Make sure Docker Desktop is installed and running.
+2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
+3. If you're using Powershell, run `docker build --build-arg USERNAME=$([System.Environment]::UserName) -t focal:bdap .`
+4. Wait for image to build.
+
+## Basic usage
+1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
+
+## Production usage
+1. Open the .env file and add `uuid=1234`, replacing 1234 with your UUID.
+If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
+2. From same directory where Dockerfile is, in terminal, run `docker-compose -f windows.yml up -d`
+3. When returned to prompt, run `docker-compose exec bdap bash`
+4. When done, in same directory, run `docker-compose stop`
+
+If you're committing your .env changes to your own repository, open the .gitignore file and uncomment .env.
