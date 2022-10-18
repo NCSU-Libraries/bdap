@@ -47,7 +47,7 @@ coming soon
 # Using with Docker on Windows
 ## Build image
 1. Make sure Docker Desktop is installed and running.
-2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
+2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git; cd bdap`
 3. If you're using Powershell, run `docker build --build-arg USERNAME=$([System.Environment]::UserName) -t focal:bdap .`
 4. Wait for image to build.
 
