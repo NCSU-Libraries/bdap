@@ -17,7 +17,7 @@ The bdap container packages and configures tools that will be useful to support 
 # Using with Docker on Mac
 ## Build image
 1. Make sure Docker Desktop is installed and running.
-2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
+2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
 3. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
 If you're on a Mac with an M1 chip, you may also need to use the `--platform linux/x86_64` flag.
 4. Wait for image to build.
@@ -35,7 +35,7 @@ If you're not using SCRC's born-digital working storage, you can uncomment and u
 # Using with podman on RHEL8
 ## Build image
 1. podman is already installed on RHEL8.
-2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
+2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
 3. Run `sudo podman build --build-arg USERNAME=$(whoami) --network host -t focal:bdap .` [verify]
 
 ## Basic usage
@@ -47,7 +47,7 @@ coming soon
 # Using with Docker on Windows
 ## Build image
 1. Make sure Docker Desktop is installed and running.
-2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git`
+2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
 3. If you're using Powershell, run `docker build --build-arg USERNAME=$([System.Environment]::UserName) -t focal:bdap .`
 4. Wait for image to build.
 
