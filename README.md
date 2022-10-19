@@ -17,10 +17,11 @@ The bdap container packages and configures tools that will be useful to support 
 # Using with Docker on Mac
 ## Build image
 1. Make sure Docker Desktop is installed and running.
-2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
-3. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
+2. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
+3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
+4. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
 If you're on a Mac with an M1 chip, you may also need to use the `--platform linux/x86_64` flag.
-4. Wait for image to build.
+5. Wait for image to build.
 
 ## Basic usage
 1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
@@ -35,8 +36,9 @@ If you're not using SCRC's born-digital working storage, you can uncomment and u
 # Using with podman on RHEL8
 ## Build image
 1. podman is already installed on RHEL8.
-2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
-3. Run `sudo podman build --build-arg USERNAME=$(whoami) --network host -t focal:bdap .` [verify]
+2. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
+3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
+4. Run `sudo podman build --build-arg USERNAME=$(whoami) --network host -t focal:bdap .` [verify]
 
 ## Basic usage
 1. `sudo podman run -v /home/bjdietz/born_digital:/home/born_digital --network host --rm -it localhost/ubu:bdap /bin/bash`
@@ -47,9 +49,10 @@ coming soon
 # Using with Docker on Windows
 ## Build image
 1. Make sure Docker Desktop is installed and running.
-2. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git; cd bdap`
-3. If you're using Powershell, run `docker build --build-arg USERNAME=$([System.Environment]::UserName) -t focal:bdap .`
-4. Wait for image to build.
+2. In Powershell, change the current working directory to where you'd like the cloned directory: `cd $HOME\Documents`
+3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git; cd bdap`
+4. Run `docker build --build-arg USERNAME=$([System.Environment]::UserName) -t focal:bdap .`
+5. Wait for image to build.
 
 ## Basic usage
 1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
