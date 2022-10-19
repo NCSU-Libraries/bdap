@@ -59,7 +59,7 @@ coming soon
 
 ## Production usage
 1. Create a volume pointing to your NFS storage: `docker volume create --driver local --opt type=nfs --opt o=addr=lib-scrc-files.lib.ncsu.edu,nfsvers=4,rw,soft,nolock --opt device=:/archives/working/born_digital born-digital`
-2. Run ``(Get-Content .env).replace("userID=`$USER", "uuid=1234`nuserID=syblack") | Set-Content .env``, replacing 1234 with your UUID.
+2. Run ``(Get-Content .env).replace("userID=`$USER", "uuid=1234`nuserID=$env:username") | Set-Content .env``, replacing 1234 with your UUID.
 If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
 3. From same directory where Dockerfile is, run `docker-compose -f windows.yml up -d`
 4. When returned to prompt, run `docker-compose exec bdap bash`
