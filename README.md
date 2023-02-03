@@ -20,7 +20,7 @@ The bdap container packages and configures tools that will be useful to support 
 2. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
 3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
 4. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
-If you're on a Mac with an M1 chip, you may also need to use the `--platform linux/x86_64` flag.
+If you're on a Mac with an M1 chip, you may also need to use the `--platform linux/amd64` flag.
 5. Wait for image to build.
 
 ## Basic usage
