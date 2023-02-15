@@ -1,0 +1,71 @@
+FROM docker.io/arm64v8/fedora:36
+
+LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
+
+# ARG DEBIAN_FRONTEND=noninteractive
+
+RUN dnf update -y \
+    && dnf install -y \
+    clamav \
+    clamd \
+    clamav-update \
+    disktype.aarch64 \
+    dvd+rw-tools \
+    git \
+    golang \
+    perl-Image-ExifTool.noarch \
+    sleuthkit \
+    sudo \
+    tree \
+
+# Install bulk_extractor
+    && mkdir /home/repos \
+    && cd /home/repos \
+    && git clone --recursive https://github.com/simsong/bulk_extractor.git \
+    && cd bulk_extractor \
+    && bash etc/CONFIGURE_FEDORA36.bash \
+    && sh bootstrap.sh \
+    && ./configure \
+    && make \
+    && make install \
+
+# Install siegfried
+    && go install github.com/richardlehane/siegfried/cmd/sf@latest \
+#    see ENV below export PATH=./root/go/bin:$PATH \
+#    run when starting sf -update \
+
+# Install hfsexplorer
+    && mkdir /usr/share/hfsexplorer \
+    && cd /usr/share/hfsexplorer \
+    && wget https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1%20%28snapshot%202016-09-02%29/hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
+    && unzip hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
+    && rm -f hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
+
+# Install brunnhilde
+    && python3 -m ensurepip --upgrade \
+    && python3 -m pip install --upgrade pip \
+    && python3 -m pip install brunnhilde \
+
+# Install walk_to_dfxml
+    && cd /home/repos \
+    && git clone https://github.com/dfxml-working-group/dfxml_python.git \
+    && cd dfxml_python \
+    && python3 -m pip install . \
+
+# Removing repos
+   && cd /home \
+    && rm -r /home/repos/dfxml_python \
+    && rm -r /home/repos/bulk_extractor
+
+ENV PATH="{$PATH}:./root/go/bin"
+
+CMD [ "executable", "sf -update", "freshclam" ]
+
+# Not installed
+#  build-essential: not sure if there's an equivalent
+#  clamav-daemon: not sure if it's needed or which package to install
+#  nfs-common: not sure what package to install
+#  software-properties-common: not sure if it's needed or if there's an equivalent
+#  some other tools installed in ubuntu bdap are already installed in fedora
+# put hfsexplorer bin in path?
+# freshclam and sf -update did not run on build
