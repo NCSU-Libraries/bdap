@@ -31,7 +31,7 @@ RUN dnf update -y \
 
 # Install siegfried
     && go install github.com/richardlehane/siegfried/cmd/sf@latest \
-#   OPT 1: && ./root/go/bin/sf -update \
+    && ./root/go/bin/sf -update \
 #    see ENV below export PATH=./root/go/bin:$PATH \
 #    run when starting sf -update \
 
@@ -54,16 +54,16 @@ RUN dnf update -y \
     && python3 -m pip install . \
 
 # OPT1: Run freshclam
-#    && freshclam
+    && freshclam \
 
 # Removing repos
     && cd /home \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
 
-ENV PATH=./root/go/bin:$PATH
+# ENV PATH=./root/go/bin:$PATH
 
-CMD sf -update; freshclam
+# CMD sf -update; freshclam
 
 # Not installed
 #  build-essential: not sure if there's an equivalent
