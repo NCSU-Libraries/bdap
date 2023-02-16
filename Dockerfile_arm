@@ -57,7 +57,7 @@ RUN dnf update -y \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
 
-ENV PATH="{$PATH}:./root/go/bin"
+ENV PATH=./root/go/bin:$PATH
 
 CMD [ "executable", "sf -update", "freshclam" ]
 
