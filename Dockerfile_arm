@@ -53,7 +53,7 @@ RUN dnf update -y \
     && cd dfxml_python \
     && python3 -m pip install . \
 
-# OPT1: Run freshclam
+# Run freshclam
     && freshclam \
 
 # Removing repos
@@ -61,7 +61,7 @@ RUN dnf update -y \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
 
-# ENV PATH=./root/go/bin:$PATH
+ENV PATH=./root/go/bin:$PATH
 
 # CMD sf -update; freshclam
 
