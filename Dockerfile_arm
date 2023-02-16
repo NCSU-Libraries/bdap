@@ -31,7 +31,7 @@ RUN dnf update -y \
 
 # Install siegfried
     && go install github.com/richardlehane/siegfried/cmd/sf@latest \
-    && ./root/go/bin/sf -update \
+    && /root/go/bin/sf -update \
 #    see ENV below export PATH=./root/go/bin:$PATH \
 #    run when starting sf -update \
 
