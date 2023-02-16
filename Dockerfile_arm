@@ -59,7 +59,7 @@ RUN dnf update -y \
 
 ENV PATH=./root/go/bin:$PATH
 
-CMD [ "executable", "sf -update", "freshclam" ]
+CMD [ "/bin/bash", "sf -update", "freshclam" ]
 
 # Not installed
 #  build-essential: not sure if there's an equivalent
