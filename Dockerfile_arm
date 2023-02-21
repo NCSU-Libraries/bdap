@@ -71,5 +71,3 @@ ENV PATH=./root/go/bin:$PATH
 #  nfs-common: not sure what package to install
 #  software-properties-common: not sure if it's needed or if there's an equivalent
 #  some other tools installed in ubuntu bdap are already installed in fedora
-# put hfsexplorer bin in path?
-# freshclam and sf -update did not run on build
