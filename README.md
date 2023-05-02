@@ -17,11 +17,12 @@ The bdap container packages and configures tools that will be useful to support 
 # Using with Docker on Mac
 ## Build image
 1. Make sure Docker Desktop is installed and running.
-2. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
-3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
-4. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
-If you're on a Mac with an M1 chip, you may also need to use the `--platform linux/amd64` flag.
-5. Wait for image to build.
+2. If you have an Intel chip, use Dockerfile (based on Ubuntu 20) or Dockerfile_fed36 (based on Fedora 36). If you have an M1 chip, use 
+Dockerfile_arm. Dockerfile_fed36 and Dockerfile_arm will need to be renamed to Dockerfil. 
+3. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
+4. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
+5. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
+6. Wait for image to build.
 
 ## Basic usage
 1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
