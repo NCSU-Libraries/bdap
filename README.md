@@ -21,7 +21,8 @@ The bdap container packages and configures tools that will be useful to support 
 Dockerfile_arm. Dockerfile_fed36 and Dockerfile_arm will need to be renamed to Dockerfil. 
 3. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
 4. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
-5. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .`
+5. Run `docker build --build-arg USERNAME=$(whoami) -t focal:bdap .` You may consider using a different name to match the base image, 
+eg, fedora:bdap.
 6. Wait for image to build.
 
 ## Basic usage
