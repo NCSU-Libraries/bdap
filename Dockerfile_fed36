@@ -6,10 +6,10 @@ LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 
 # Add user and group
 # update values
-ARG USERNAME=username
-ARG GROUPNAME=groupname 
-ARG USER_UID=1000
-ARG USER_GID=2000
+ARG USERNAME=user
+ARG GROUPNAME=group 
+ARG USER_UID=number
+ARG USER_GID=number
 
 RUN dnf update -y \
     && dnf install -y \
@@ -26,6 +26,8 @@ RUN dnf update -y \
 # Users, group, and sudo access
     && groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /root/go/bin/sf -update, /bin/freshclam > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
 # Install bulk_extractor
     && mkdir /home/repos \
     && cd /home/repos \
@@ -66,7 +68,6 @@ CMD [ "/bin/bash" ]
 
 # Not installed
 # build-essential: not sure if there's an equivalent
-# do not need sudo for dnf-update freshclam
 # clamav-daemon: not sure if it's needed or which package to install; installed clamd and clamav-update
 # nfs-common: not sure what package to install
 # software-properties-common: not sure if it's needed or if there's an equivalent

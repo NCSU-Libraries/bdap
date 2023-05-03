@@ -4,6 +4,13 @@ LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 
 # ARG DEBIAN_FRONTEND=noninteractive
 
+# Add user and group
+# update values
+ARG USERNAME=user
+ARG GROUPNAME=group 
+ARG USER_UID=number
+ARG USER_GID=number
+
 RUN dnf update -y \
     && dnf install -y \
     clamav \
@@ -17,6 +24,12 @@ RUN dnf update -y \
     sleuthkit \
     sudo \
     tree \
+
+# Users, group, and sudo access
+    && groupadd --gid $USER_GID $GROUPNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /root/go/bin/sf -update, /bin/freshclam > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
 
 # Install bulk_extractor
     && mkdir /home/repos \
