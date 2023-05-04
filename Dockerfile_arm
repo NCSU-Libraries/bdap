@@ -24,13 +24,11 @@ RUN dnf update -y \
     sleuthkit \
     sudo \
     tree \
-
 # Users, group, and sudo access
     && groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /root/go/bin/sf -update, /bin/freshclam > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
-
 # Install bulk_extractor
     && mkdir /home/repos \
     && cd /home/repos \
@@ -41,35 +39,26 @@ RUN dnf update -y \
     && ./configure \
     && make \
     && make install \
-
 # Install siegfried
     && go install github.com/richardlehane/siegfried/cmd/sf@latest \
     && /root/go/bin/sf -update \
-
-#    see ENV below export PATH=./root/go/bin:$PATH \
-#    run when starting sf -update \
-
 # Install hfsexplorer
     && mkdir /usr/share/hfsexplorer \
     && cd /usr/share/hfsexplorer \
     && wget https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1%20%28snapshot%202016-09-02%29/hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
     && unzip hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
     && rm -f hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
-
 # Install brunnhilde
     && python3 -m ensurepip --upgrade \
     && python3 -m pip install --upgrade pip \
     && python3 -m pip install brunnhilde \
-
 # Install walk_to_dfxml
     && cd /home/repos \
     && git clone https://github.com/dfxml-working-group/dfxml_python.git \
     && cd dfxml_python \
     && python3 -m pip install . \
-
 # Run freshclam
     && freshclam \
-
 # Removing repos
     && cd /home \
     && rm -r /home/repos/dfxml_python \
