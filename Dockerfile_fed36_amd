@@ -62,7 +62,7 @@ RUN dnf update -y \
     && cd /home \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
-ENV PATH="$HOME/go/bin:$PATH"
+ENV PATH="/root/go/bin:$PATH"
 
 CMD [ "/bin/bash" ]
 
