@@ -6,10 +6,10 @@ LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 
 # Add user and group
 # update values
-ARG USERNAME=user
-ARG GROUPNAME=group 
-ARG USER_UID=number
-ARG USER_GID=number
+ARG USERNAME=syblack
+ARG GROUPNAME=scrc 
+ARG USER_UID=1000
+ARG USER_GID=2000
 
 RUN dnf update -y \
     && dnf install -y \
@@ -40,8 +40,10 @@ RUN dnf update -y \
     && make \
     && make install \
 # Install siegfried
+    && export GOPATH=$(go env GOPATH) \
+    && GOPATH=/usr/local/go \
     && go install github.com/richardlehane/siegfried/cmd/sf@latest \
-    && /root/go/bin/sf -update \
+    && /usr/local/go/bin/sf -update \
 # Install hfsexplorer
     && mkdir /usr/share/hfsexplorer \
     && cd /usr/share/hfsexplorer \
@@ -64,7 +66,7 @@ RUN dnf update -y \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
 
-ENV PATH="$HOME/go/bin:$PATH"
+ENV PATH="$PATH:/usr/local/go/bin"
 
 # CMD sf -update; freshclam
 
