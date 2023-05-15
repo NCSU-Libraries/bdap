@@ -7,9 +7,9 @@ LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 # Add user and group
 # update values
 ARG USERNAME=user
-ARG GROUPNAME=scrc 
-ARG USER_UID=1000
-ARG USER_GID=2000
+ARG GROUPNAME=group 
+ARG USER_UID=number
+ARG USER_GID=number
 
 RUN dnf update -y \
     && dnf install -y \
