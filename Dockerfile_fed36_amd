@@ -26,7 +26,7 @@ RUN dnf update -y \
 # Users, group, and sudo access
     && groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /root/go/bin/sf -update, /bin/freshclam > /etc/sudoers.d/$USERNAME \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /bin/freshclam > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
 # Install bulk_extractor
     && mkdir /home/repos \
