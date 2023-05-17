@@ -27,7 +27,7 @@ RUN dnf update -y \
 # Users, group, and sudo access
     && groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /bin/freshclam > /etc/sudoers.d/$USERNAME \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /bin/freshclam, /usr/local/bin/update_env.sh > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
 # Install bulk_extractor
     && mkdir /home/repos \
@@ -67,8 +67,10 @@ RUN dnf update -y \
     && rm -r /home/repos/bulk_extractor
 
 ENV PATH="$PATH:/usr/local/go/bin"
-
-# CMD sf -update; freshclam
+# update values
+COPY --chmod=0775 --chown=user:group /update_env.sh /usr/local/bin/
+ENTRYPOINT ["update_env.sh"]
+CMD ["/bin/bash"]
 
 # Not installed
 #  build-essential: not sure if there's an equivalent
