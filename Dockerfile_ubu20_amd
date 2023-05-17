@@ -37,7 +37,7 @@ RUN apt-get update \
 # Users, group, and sudo access
     && groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/apt-get -y update, /bin/apt-get -y upgrade, /bin/freshclam > /etc/sudoers.d/$USERNAME \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/apt-get -y update, /bin/apt-get -y upgrade, /bin/freshclam, /usr/local/bin/update_env.sh > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
 # Install bulk_extractor
     && mkdir /home/repos \
@@ -70,8 +70,11 @@ RUN apt-get update \
 # Removing repos
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
+    
+# update values
+COPY --chmod=0775 --chown=user:group /update_env.sh /usr/local/bin/
+ENTRYPOINT ["update_env.sh"]
+CMD ["/bin/bash"]
 
 # commenting out something we have not fully discussed
 # COPY prelim_logical_reports.sh /home/scripts/prelim_logical_reports.sh
-
-CMD [ "/bin/bash" ]
