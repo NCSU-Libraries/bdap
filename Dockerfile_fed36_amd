@@ -58,6 +58,8 @@ RUN dnf update -y \
     && git clone https://github.com/dfxml-working-group/dfxml_python.git \
     && cd dfxml_python \
     && python3 -m pip install . \
+# Install isolyzer
+    && python3 -m pip install isolyzer \
 # Run freshclam
     && freshclam \
 # Removing repos
