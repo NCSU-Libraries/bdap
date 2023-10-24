@@ -15,6 +15,6 @@ The bdap container packages and configures tools that will be useful to support 
 - various Linux utilties
 
 # Instructions on building and using the container
-[Mac](https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-Docker-on-Mac)
-[Windows](https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-Docker-on-Windows)
-[Red Hat Enterprise Linux](https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-podman-on-RHEL8)
+- [Mac](https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-Docker-on-Mac)
+- [Windows](https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-Docker-on-Windows)
+- [Red Hat Enterprise Linux](https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-podman-on-RHEL8)
