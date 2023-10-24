@@ -14,55 +14,7 @@ The bdap container packages and configures tools that will be useful to support 
 - sudo for limited tasks for non-root user
 - various Linux utilties
 
-# Using with Docker on Mac
-## Build image
-1. Make sure Docker Desktop is installed and running.
-2. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
-3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap` 
-4. Run `docker build -f Dockerfile_fed36_arm --build-arg USERNAME=$(whoami) -t fedora:bdap .` 
-NOTE: For the -f option, specify Dockerfile_ubu20_amd (based on Ubuntu 20) or Dockerfile_fed36 (based on Fedora 36) if you have an Intel chip. Specify Dockerfile_fed36_arm if you have an M1 or M2 chip. You may also consider using a different name (-t option) to match the base image, such as focal:bdap for Ubuntu 20.
-5. Wait for image to build.
-
-## Basic usage
-1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
-
-## Production usage
-1. Run `sed -i '' '2s/^/uuid=1234\n/' .env`, replacing 1234 with your own uuid.
-If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
-2. From same directory where Dockerfile is, in terminal, run `docker-compose up -d`
-3. When returned to prompt, run `docker-compose exec bdap bash`
-4. When done, in same directory, run `docker-compose stop`
-
-# Using with podman on RHEL8
-## Build image
-1. podman is already installed on RHEL8.
-2. Change the current working directory to where you'd like the cloned directory: `cd $HOME/Documents`
-3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git && cd bdap`
-4. Run `sudo podman build --build-arg USERNAME=$(whoami) --network host -t focal:bdap .` [verify]
-
-## Basic usage
-1. `sudo podman run -v /home/bjdietz/born_digital:/home/born_digital --network host --rm -it localhost/ubu:bdap /bin/bash`
-
-## Production usage
-coming soon
-
-# Using with Docker on Windows
-## Build image
-1. Make sure Docker Desktop is installed and running.
-2. In Powershell, change the current working directory to where you'd like the cloned directory: `cd $HOME\Documents`
-3. Run `git clone https://github.ncsu.edu/bjdietz/bdap.git; cd bdap`
-4. Run `docker build --build-arg USERNAME=$([System.Environment]::UserName) -t focal:bdap .`
-5. Wait for image to build.
-
-## Basic usage
-1. After you've built the image, you should be able to run a command like `docker run -it --rm focal:bdap /bin/bash` to start the container and enter in a shell. The `--rm` option will remove the container once you've exited it.
-
-## Production usage
-1. Create a volume pointing to your NFS storage: `docker volume create --driver local --opt type=nfs --opt o=addr=lib-scrc-files.lib.ncsu.edu,nfsvers=4,rw,soft,nolock --opt device=:/archives/working/born_digital born-digital`
-2. Run ``(Get-Content .env).replace("userID=`$USER", "uuid=1234`nuserID=$env:username") | Set-Content .env``, replacing 1234 with your UUID.
-If you're not using SCRC's born-digital working storage, you can uncomment and use the storage variables in the .env file.
-3. From same directory where Dockerfile is, run `docker-compose -f windows.yml up -d`
-4. When returned to prompt, run `docker-compose exec bdap bash`
-5. When done, in same directory, run `docker-compose stop`
-
-If you're committing your .env changes to your own repository, open the .gitignore file and uncomment .env.
+# Instructions on building and using the container
+(Mac)[https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-Docker-on-Mac]
+(Windows)[https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-Docker-on-Windows]
+(Red Hat Enterprise Linux)[https://github.ncsu.edu/bjdietz/bdap/wiki/Using-with-podman-on-RHEL8]
