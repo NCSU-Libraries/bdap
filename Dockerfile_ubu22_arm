@@ -1,0 +1,82 @@
+FROM docker.io/arm64v8/ubuntu:jammy
+
+LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Add user and group
+ARG USERNAME=user
+ARG GROUPNAME=scrc
+ARG USER_UID=1000
+ARG USER_GID=2000
+
+RUN apt-get update \
+    && apt-get install -y \
+    build-essential \
+    clamav \
+    clamav-daemon \
+    default-jre \
+    disktype \
+    dvd+rw-tools \
+    fdisk \
+    git \
+    golang \
+    libimage-exiftool-perl \
+    mediainfo \
+    nfs-common \
+    python3 \
+    python3-pip \
+    sleuthkit \
+    software-properties-common \
+    sudo \
+    tree \
+    unzip \
+    wget \
+# Clean up the apt cache
+    && rm -rf /var/lib/apt/lists/* \
+# Users, group, and sudo access
+    && groupadd --gid $USER_GID $GROUPNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/apt-get -y update, /bin/apt-get -y upgrade, /bin/freshclam, /usr/local/bin/update_env.sh > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+# Install bulk_extractor
+    && mkdir /home/repos \
+    && cd /home/repos \
+    && git clone --recursive https://github.com/simsong/bulk_extractor.git \
+    && cd bulk_extractor && bash etc/CONFIGURE_UBUNTU22LTS.bash \
+    && bash bootstrap.sh \
+    && ./configure \
+    && make \
+    && make install \
+# Install siegfried
+    && export GOPATH=$(go env GOPATH) \
+    && GOPATH=/usr/local/go \
+    && go install github.com/richardlehane/siegfried/cmd/sf@latest \
+    && /usr/local/go/bin/sf -update \
+# Install hfsexplorer
+    && mkdir /usr/share/hfsexplorer \
+    && cd /usr/share/hfsexplorer \
+    && wget https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1%20%28snapshot%202016-09-02%29/hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
+    && unzip hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
+    && rm hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
+# Install brunnhilde
+    && python3 -m pip install brunnhilde \
+# Install walk_to_dfxml
+    && cd /home/repos \
+    && git clone https://github.com/dfxml-working-group/dfxml_python.git \
+    && cd dfxml_python \
+    && pip3 install . \
+    && cd /home \
+# Install isolyzer
+    && python3 -m pip install isolyzer \
+# Removing repos
+    && rm -r /home/repos/dfxml_python \
+    && rm -r /home/repos/bulk_extractor
+
+ENV GOPATH /usr/local/go
+ENV PATH $PATH:$GOPATH/bin
+
+# update values
+COPY --chmod=0775 --chown=user:group /update_env_ubu.sh /usr/local/bin/
+ENTRYPOINT ["update_env_ubu.sh"]
+CMD ["/bin/bash"]
