@@ -73,10 +73,6 @@ RUN apt-get update \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
     
-# update values
-COPY --chmod=0775 --chown=user:group /update_env.sh /usr/local/bin/
-ENTRYPOINT ["update_env.sh"]
+COPY --chmod=0775 --chown=1000:2000 /update_env.sh /usr/local/bin/
+ENTRYPOINT ["update_env_ubu.sh"]
 CMD ["/bin/bash"]
-
-# commenting out something we have not fully discussed
-# COPY prelim_logical_reports.sh /home/scripts/prelim_logical_reports.sh
