@@ -73,6 +73,6 @@ RUN apt-get update \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
     
-COPY --chmod=0775 --chown=1000:2000 /update_env.sh /usr/local/bin/
+COPY --chmod=0775 --chown=1000:2000 /update_env_ubu.sh /usr/local/bin/
 ENTRYPOINT ["update_env_ubu.sh"]
 CMD ["/bin/bash"]
