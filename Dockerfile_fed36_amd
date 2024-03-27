@@ -5,7 +5,6 @@ LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 # ARG DEBIAN_FRONTEND=noninteractive
 
 # Add user and group
-# update values
 ARG USERNAME=user
 ARG GROUPNAME=group 
 ARG USER_UID=number
@@ -68,7 +67,7 @@ RUN dnf update -y \
     && rm -r /home/repos/bulk_extractor
 
 ENV PATH="$PATH:/usr/local/go/bin"
-COPY --chmod=0775 --chown=1000:2000 /update_env.sh /usr/local/bin/
+COPY --chmod=0775 --chown=1000:2000 /update_env_fed.sh /usr/local/bin/
 ENTRYPOINT ["update_env_fed.sh"]
 CMD [ "/bin/bash" ]
 
