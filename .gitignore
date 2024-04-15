@@ -1,2 +1,3 @@
 # Ignore file with storage paths
 #.env
+.DS_Store

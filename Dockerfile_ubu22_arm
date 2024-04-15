@@ -1,39 +1,50 @@
-FROM docker.io/amd64/fedora:36
+FROM docker.io/arm64v8/ubuntu:jammy
 
 LABEL maintainer="NCSU SCRC special_collections@ncsu.edu"
 
-# ARG DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Add user and group
 ARG USERNAME=user
-ARG GROUPNAME=group 
-ARG USER_UID=number
-ARG USER_GID=number
+ARG GROUPNAME=scrc
+ARG USER_UID=1000
+ARG USER_GID=2000
 
-RUN dnf update -y \
-    && dnf install -y \
+RUN apt-get update \
+    && apt-get install -y \
+    build-essential \
     clamav \
-    clamd \
-    clamav-update \
+    clamav-daemon \
+    default-jre \
+    disktype \
     dvd+rw-tools \
+    fdisk \
     git \
     golang \
-    perl-Image-ExifTool.noarch \
+    libimage-exiftool-perl \
+    mediainfo \
+    nfs-common \
+    python3 \
+    python3-pip \
     sleuthkit \
+    software-properties-common \
     sudo \
     tree \
+    unzip \
+    wget \
+# Clean up the apt cache
+    && rm -rf /var/lib/apt/lists/* \
 # Users, group, and sudo access
     && groupadd --gid $USER_GID $GROUPNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/dnf -y update, /bin/dnf -y upgrade, /bin/freshclam, /usr/local/bin/update_env.sh > /etc/sudoers.d/$USERNAME \
+    && echo $USERNAME ALL=\(ALL\) NOPASSWD: /bin/apt-get -y update, /bin/apt-get -y upgrade, /bin/freshclam, /usr/local/bin/update_env.sh > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
 # Install bulk_extractor
     && mkdir /home/repos \
     && cd /home/repos \
     && git clone --recursive https://github.com/simsong/bulk_extractor.git \
-    && cd bulk_extractor \
-    && bash etc/CONFIGURE_FEDORA36.bash \
-    && sh bootstrap.sh \
+    && cd bulk_extractor && bash etc/CONFIGURE_UBUNTU22LTS.bash \
+    && bash bootstrap.sh \
     && ./configure \
     && make \
     && make install \
@@ -47,33 +58,24 @@ RUN dnf update -y \
     && cd /usr/share/hfsexplorer \
     && wget https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.23.1%20%28snapshot%202016-09-02%29/hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
     && unzip hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
-    && rm -f hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
+    && rm hfsexplorer-0.23.1-snapshot_2016-09-02-bin.zip \
 # Install brunnhilde
-    && python3 -m ensurepip --upgrade \
-    && python3 -m pip install --upgrade pip \
     && python3 -m pip install brunnhilde \
 # Install walk_to_dfxml
     && cd /home/repos \
     && git clone https://github.com/dfxml-working-group/dfxml_python.git \
     && cd dfxml_python \
-    && python3 -m pip install . \
+    && pip3 install . \
+    && cd /home \
 # Install isolyzer
     && python3 -m pip install isolyzer \
-# Run freshclam
-    && freshclam \
 # Removing repos
-    && cd /home \
     && rm -r /home/repos/dfxml_python \
     && rm -r /home/repos/bulk_extractor
 
-ENV PATH="$PATH:/usr/local/go/bin"
-COPY --chmod=0775 --chown=1000:2000 /update_env_fed.sh /usr/local/bin/
-ENTRYPOINT ["update_env_fed.sh"]
-CMD [ "/bin/bash" ]
+ENV GOPATH /usr/local/go
+ENV PATH $PATH:$GOPATH/bin
 
-# Not installed
-# build-essential: not sure if there's an equivalent
-# clamav-daemon: not sure if it's needed or which package to install; installed clamd and clamav-update
-# nfs-common: not sure what package to install
-# software-properties-common: not sure if it's needed or if there's an equivalent
-# some other tools installed in ubuntu bdap are already installed in fedora
+COPY --chmod=0775 --chown=1000:2000 /update_env_ubu.sh /usr/local/bin/
+ENTRYPOINT ["update_env_ubu.sh"]
+CMD ["/bin/bash"]

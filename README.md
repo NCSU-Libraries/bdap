@@ -14,7 +14,5 @@ The bdap container packages and configures tools that will be useful to support 
 - sudo for limited tasks for non-root user
 - various Linux utilties
 
-# Instructions on building and using the container
-- [Mac](https://github.com/NCSU-Libraries/bdap/wiki/Using-with-Docker-on-Mac)
-- [Windows](https://github.com/NCSU-Libraries/bdap/wiki/Using-with-Docker-on-Windows)
-- [Red Hat Enterprise Linux](https://github.com/NCSU-Libraries/bdap/wiki/Using-with-podman-on-RHEL8)
+# Instructions
+Refer to our [wiki](../../wiki) for instructions on building and using the image on Mac, Windows, and RHEL Linux.
