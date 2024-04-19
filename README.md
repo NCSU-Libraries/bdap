@@ -16,3 +16,10 @@ The bdap container packages and configures tools that will be useful to support 
 
 # Instructions
 Refer to our [wiki](../../wiki) for instructions on building and using the image on Mac, Windows, and RHEL Linux.
+
+# Deprecations
+## Fedora 36-based image (end of life)
+- We had selected Fedora because, at the time we were preparing the ARM image file, it would not build using Ubuntu
+- We had been using 36 because it is the only version of Fedora that bulk_extractor installation scripts were written for
+## Ubuntu 20 
+- ARM and AMD files both build on Ubuntu 22 so we are deprecating 20
