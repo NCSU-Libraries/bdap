@@ -1,10 +1,9 @@
-version : '3'
 services:
   bdap:
     image: ubuntu:bdap
     tty: true
     stdin_open: true
-    # volumes:
-    #  - ${BDAP_STORAGE_VOLUME_SOURCE:-/Users/$userID/born_digital}:${BDAP_STORAGE_VOLUME_TARGET:-/Users/borndigital/born_digital}
-    #  - /Volumes:/Volumes:ro
+    volumes:
+     - ${BDAP_STORAGE_VOLUME_SOURCE:-/Users/$userID/born_digital}:${BDAP_STORAGE_VOLUME_TARGET:-/Users/borndigital/born_digital}
+     - /Volumes:/Volumes:ro
     user: $userID
