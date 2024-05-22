@@ -1,6 +1,6 @@
 services:
   bdap:
-    image: focal:bdap
+    image: ubuntu:bdap
     tty: true
     stdin_open: true
     volumes:
