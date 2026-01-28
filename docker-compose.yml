@@ -4,6 +4,8 @@ services:
     tty: true
     stdin_open: true
     volumes:
+     # Check if variables BDAP_STORAGE_VOLUME_SOURCE and BDAP_STORAGE_VOLUME_TARGET exist, i.e. if they were defined in .env file
      - ${BDAP_STORAGE_VOLUME_SOURCE:-/Users/$userID/born_digital}:${BDAP_STORAGE_VOLUME_TARGET:-/Users/borndigital/born_digital}
      - /Volumes:/Volumes:ro
+    # Uses userid from what is defined in .env
     user: $userID
